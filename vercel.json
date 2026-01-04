@@ -4,10 +4,5 @@
     "api/*.js": {
       "runtime": "nodejs18.x"
     }
-  },
-  "routes": [
-    { "src": "/api/upload", "dest": "/api/upload.js" },
-    { "src": "/api/files", "dest": "/api/files.js" },
-    { "src": "/(.*)", "dest": "/index.html" }
-  ]
+  }
 }
