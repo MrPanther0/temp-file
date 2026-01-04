@@ -6,8 +6,8 @@
     }
   },
   "routes": [
-    { "src": "/api/(.*)", "dest": "/api/$1" },
-    { "src": "/files", "dest": "/api/files" },
+    { "src": "/api/upload", "dest": "/api/upload.js" },
+    { "src": "/api/files", "dest": "/api/files.js" },
     { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
