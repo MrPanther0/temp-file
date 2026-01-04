@@ -1,18 +1,13 @@
 {
   "version": 2,
-  "outputDirectory": ".",
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
-    },
-    {
-      "src": "/files",
-      "dest": "/api/files"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
+  "functions": {
+    "api/*.js": {
+      "runtime": "nodejs18.x"
     }
+  },
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/api/$1" },
+    { "src": "/files", "dest": "/api/files" },
+    { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
