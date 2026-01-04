@@ -8,7 +8,7 @@ if (!admin.apps.length) {
   admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     // Use the full Firebase Storage bucket name
-    storageBucket: 'temp-file-29f4a.firebasestorage.app'  // <-- CHANGE THIS (more below)
+    storageBucket: 'gs://temp-file-29f4a.firebasestorage.app'  // <-- CHANGE THIS (more below)
   });
 }
 
@@ -51,3 +51,4 @@ export default async function handler(req, res) {
     }
   });
 }
+
