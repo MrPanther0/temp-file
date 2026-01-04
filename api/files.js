@@ -5,22 +5,26 @@ const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 if (!admin.apps.length) {
   admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-    storageBucket: 'temp-file-29f4a.firebasestorage.app'
+    // Fix the storage bucket name here:
+    storageBucket: 'temp-file-29f4a.firebasestorage.app'  // <-- correct bucket name format
   });
 }
 
 const bucket = admin.storage().bucket();
 
 export default async function handler(req, res) {
-  if (req.method !== 'GET') return res.status(405).send('Method Not Allowed');
+  if (req.method !== 'GET') {
+    return res.status(405).send('Method Not Allowed');
+  }
 
   try {
+    // Get list of files in the bucket
     const [files] = await bucket.getFiles();
 
     const fileCards = files.map(f => `
       <div class="file-card">
         <div class="file-name">${f.name}</div>
-        <a href="https://storage.googleapis.com/${bucket.name}/${encodeURIComponent(f.name)}" target="_blank" class="download-btn">Download</a>
+        <a href="https://storage.googleapis.com/${bucket.name}/${encodeURIComponent(f.name)}" target="_blank" rel="noopener noreferrer" class="download-btn">Download</a>
       </div>
     `).join('');
 
@@ -28,9 +32,9 @@ export default async function handler(req, res) {
       <!DOCTYPE html>
       <html lang="en">
       <head>
-        <meta charset="UTF-8">
+        <meta charset="UTF-8" />
         <title>Uploaded Files</title>
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
         <style>
           body {
             font-family: 'Roboto', sans-serif;
@@ -62,7 +66,7 @@ export default async function handler(req, res) {
           .file-name {
             font-weight: 500;
             margin-bottom: 15px;
-            word-break: break-all;
+            word-break: break-word;
           }
           .download-btn {
             text-decoration: none;
@@ -97,9 +101,8 @@ export default async function handler(req, res) {
       </body>
       </html>
     `);
-
   } catch (err) {
-    console.error(err);
+    console.error('Error listing files:', err);
     res.status(500).send('Failed to list files');
   }
 }
