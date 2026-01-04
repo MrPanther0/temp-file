@@ -6,7 +6,7 @@ if (!admin.apps.length) {
   admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     // Fix the storage bucket name here:
-    storageBucket: 'gs://temp-file-29f4a.firebasestorage.app'  // <-- correct bucket name format
+    storageBucket: 'temp-file-29f4a.firebasestorage.app'  // <-- correct bucket name format
   });
 }
 
@@ -106,4 +106,5 @@ export default async function handler(req, res) {
     res.status(500).send('Failed to list files');
   }
 }
+
 
