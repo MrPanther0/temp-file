@@ -3,7 +3,7 @@ export default function handler(req, res) {
     const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
     res.status(200).json({
       project_id: serviceAccount.project_id,
-      bucket: 'gs://temp-file-29f4a.firebasestorage.app',
+      bucket: 'temp-file-29f4a.firebasestorage.app',
       envVarExists: !!process.env.FIREBASE_SERVICE_ACCOUNT
     });
   } catch (error) {
